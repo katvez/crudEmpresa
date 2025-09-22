@@ -3,6 +3,7 @@ package com.example.crudSpring.projetoCRUD.SERVICE;
 import java.util.List;
 import java.util.Optional;
 
+import org.hibernate.engine.jdbc.internal.DDLFormatterImpl;
 import org.springframework.stereotype.Service;
 
 import com.example.crudSpring.projetoCRUD.ENTITY.Empresa;
@@ -38,7 +39,20 @@ public class EmpresaService {
     }
 
     public Empresa editarDadosEmpresa(Long id, Empresa dadosAtualizados){
-        return null;
+        
+        Empresa empresaBuscada= buscPorId(id).orElseThrow(() -> new IllegalArgumentException("Empresa não encontrada"));
+        
+        empresaBuscada.setNome_empresa(dadosAtualizados.getNome_empresa());
+        empresaBuscada.setCnpj(dadosAtualizados.getCnpj());
+        empresaBuscada.setRamo(dadosAtualizados.getRamo());
+
+        return empresaRepository.save(empresaBuscada);
+    }
+
+    public List<Empresa>buscarEmpresaPorNome(String nome_empresa){
+
+        return empresaRepository.findByNomeContainingIgnoreCase(nome_empresa);
+    }
 
 
     }
@@ -54,4 +68,4 @@ public class EmpresaService {
 
 
     
-}
+
