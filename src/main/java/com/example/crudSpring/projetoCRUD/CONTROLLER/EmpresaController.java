@@ -28,6 +28,15 @@ public class EmpresaController {
         this.empresaService = ligacaoEmpresaService;
     }
 
+    @GetMapping("/listarTodasEmpresas")
+    public String listarEmpresas(Model oModel) {
+        oModel.addAttribute("empresas", empresaService.findAll());
+        return "listarEmpresas";
+    }
+    
+    
+
+
     //chamada para listar todas as empresas
     @GetMapping("/viewCadEmpresa")
     public String mostrarFormCadastro(Model model){
@@ -44,12 +53,7 @@ public class EmpresaController {
         empresaService.cadastrarEmpresa(objEmpresa);
 
     
-        return "redirect:/empresaCTR/viewCadEmpresa";
-
-
-
+        return "redirect:/empresaCTR/listarTodasEmpresas";
     }
-
-    
-    }
-    
+}
+ 
