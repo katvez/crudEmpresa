@@ -29,8 +29,8 @@ public class EmpresaService {
         return empresaRepository.save(dadosEmpresa);
     }
 
-    public void deletarEmpresa(Empresa dadosEmpresa){
-        empresaRepository.delete(dadosEmpresa);
+    public void deletarEmpresa(Long id){
+        empresaRepository.deleteById(id);
     }
     //realizar a busca de dados no banco usando o id
     //criado da classe

@@ -18,18 +18,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestBody;
 
-
-
 @Controller
 @RequestMapping("/empresaCTR")
 
-
-
 public class EmpresaController {
-    
+
     private final EmpresaService empresaService;
 
-    public EmpresaController(EmpresaService ligacaoEmpresaService){
+    public EmpresaController(EmpresaService ligacaoEmpresaService) {
         this.empresaService = ligacaoEmpresaService;
     }
 
@@ -38,51 +34,52 @@ public class EmpresaController {
         oModel.addAttribute("empresas", empresaService.findAll());
         return "listarEmpresas";
     }
-    
-    
 
-
-    //chamada para listar todas as empresas
+    // chamada para listar todas as empresas
     @GetMapping("/viewCadEmpresa")
-    public String mostrarFormCadastro(Model model){
+    public String mostrarFormCadastro(Model model) {
 
         model.addAttribute("empresa", new Empresa());
         return "cadastroEmpresa";
     }
 
-    @PostMapping("/salvarEmpresa") 
+    @PostMapping("/salvarEmpresa")
     public String salvarEmpresa(@ModelAttribute Empresa objEmpresa) {
 
-        //chamando o métofo cadastrar e passando
-        //o objeto ("pacotinho") com os dados que precisam ser salvos
+        // chamando o métofo cadastrar e passando
+        // o objeto ("pacotinho") com os dados que precisam ser salvos
         empresaService.cadastrarEmpresa(objEmpresa);
 
-    
         return "redirect:/empresaCTR/listarTodasEmpresas";
     }
 
     @GetMapping("/editar/{id}")
-    public String formEditar(@PathVariable("id") Long id,Model oModel){
-    
-    Empresa objEmpresa = empresaService.buscPorId(id)
-    .orElseThrow(() -> new
-    IllegalArgumentException("Empresa não encontrada"));
+    public String formEditar(@PathVariable("id") Long id, Model oModel) {
 
-    oModel.addAttribute("empresaEditar", objEmpresa);
-    return "editarEmpresa";
+        Empresa objEmpresa = empresaService.buscPorId(id)
+                .orElseThrow(() -> new IllegalArgumentException("Empresa não encontrada"));
+
+        oModel.addAttribute("empresaEditar", objEmpresa);
+        return "editarEmpresa";
 
     }
 
     @PostMapping("/atualizarEmpresa/{id}")
-    public String empresaAtualizar(@PathVariable Long id,
-    @ModelAttribute Empresa objEmpresaAtualizada){
+    public String empresaAtualizar(@PathVariable("id") Long id,
+            @ModelAttribute Empresa objEmpresaAtualizada) {
+
+        empresaService.editarDadosEmpresa(id, objEmpresaAtualizada);
 
         return "redirect:/empresaCTR/listarTodasEmpresas";
     }
 
-    
-    }
-    
-    
+    @GetMapping("/deletarEmpresa/{id}")
+    public String apagarEmpresa(@PathVariable("id") Long id) {
 
- 
+        empresaService.deletarEmpresa(id);
+
+        return "redirect:/empresaCTR/listarTodasEmpresas";
+
+    }
+
+}

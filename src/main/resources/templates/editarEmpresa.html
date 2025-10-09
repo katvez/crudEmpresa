@@ -7,7 +7,7 @@
 <body>
     <h1>Editar Empresa</h1>
 
-    <form th:action="@{'/empresaCTR/atualizarempresa/'+${empresaEditar.id_empresa}}"
+    <form th:action="@{'/empresaCTR/atualizarEmpresa/'+${empresaEditar.id_empresa}}"
     th:object="${empresaEditar}" method="post">
 
         <label for="nome">Nome da Empresa:</label>
