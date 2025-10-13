@@ -1,38 +1,72 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title>Cadastrar Empresa</title>
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
 </head>
+<body class="bg-light">
 
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-5">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h2 class="card-title text-center mb-4">Cadastrar Empresa</h2>
 
-<body style="text-align:center">
+                        <!-- Formulário para cadastro -->
+                        <form th:action="@{/empresaCTR/salvarEmpresa}" th:object="${empresa}" method="post" novalidate>
 
+                            <div class="mb-3">
+                                <label for="nome" class="form-label">Nome da Empresa</label>
+                                <input 
+                                    type="text" 
+                                    th:field="*{nome}" 
+                                    id="nome" 
+                                    class="form-control" 
+                                    placeholder="Digite o nome da empresa" 
+                                    required
+                                >
+                            </div>
 
-    <h2>Cadastrar Empresa</h2>
+                            <div class="mb-3">
+                                <label for="cnpj" class="form-label">CNPJ</label>
+                                <input 
+                                    type="text" 
+                                    th:field="*{cnpj}" 
+                                    id="cnpj" 
+                                    class="form-control" 
+                                    placeholder="00.000.000/0000-00" 
+                                    required
+                                >
+                            </div>
 
-    <!-- Formulário para cadastro -->
-    <form th:action="@{/empresaCTR/salvarEmpresa}" th:object="${empresa}" method="post">
+                            <div class="mb-4">
+                                <label for="ramo" class="form-label">Ramo da Empresa</label>
+                                <input 
+                                    type="text" 
+                                    th:field="*{ramo}" 
+                                    id="ramo" 
+                                    class="form-control" 
+                                    placeholder="Ex: Tecnologia, Comércio..." 
+                                    required
+                                >
+                            </div>
 
-        <label for="nome">Nome da Empresa</label>
-        <input type="text" th:field="*{nome}" id="nome" required>
-        <br>
-        <br>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <button type="submit" class="btn btn-success px-4">Salvar</button>
+                                <a th:href="@{/empresaCTR}" class="btn btn-outline-secondary">Cancelar</a>
+                            </div>
 
-        <label for="cnpj">CNPJ</label>
-        <input type="text" th:field="*{cnpj}" id="cnpj" required>
-        <br>
-        <br>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-        <label for="ramo">Ramo da Empresa</label>
-        <input type="text" th:field="*{ramo}" id="ramo" required>
-        <br>
-        <br>
-
-        <button type="submit" class="btn btn-success">Salvar</button>
-        <a th:href="@{/empresaCTR}">Cancelar</a>
-
-    </form>
-
+    <!-- Bootstrap JS Bundle (opcional, para funcionalidades) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
