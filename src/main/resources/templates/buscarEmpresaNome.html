@@ -24,7 +24,7 @@
     <h2 class="text-center mb-4">Buscar Empresa por Nome</h2>
 
     <!-- Formulário de busca -->
-    <form th:action="@{/empresaCTR/buscarNome}" method="get" class="mb-4">
+    <form th:action="@{/empresaCTR/buscarEmpresaNome}" method="get" class="mb-4">
         <div class="input-group">
             <input type="text" name="nome" th:value="${param.nome}" class="form-control" placeholder="Digite o nome da empresa" />
             <button type="submit" class="btn btn-primary">Buscar</button>
