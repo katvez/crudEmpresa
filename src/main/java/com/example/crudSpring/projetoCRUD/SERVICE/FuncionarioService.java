@@ -12,20 +12,19 @@ import com.example.crudSpring.projetoCRUD.REPOSITORY.FuncionarioRepository;
 import jakarta.transaction.Transactional;
 
 @Service
-
 public class FuncionarioService {
 
     @Autowired
     private FuncionarioRepository ligacaoFuncionarioRepository;
 
-    public List<Funcionario> listarTodosFuncionarios() {
+    public List<Funcionario> listarTodosFuncionarios(){
         return ligacaoFuncionarioRepository.findAll();
     }
 
     public Funcionario cadastrarFuncionario(Funcionario dadosFuncionario) {
         return ligacaoFuncionarioRepository.save(dadosFuncionario);
     }
-
+    
     public Optional<Funcionario> buscarFuncionarioPorId(Long id) {
         return ligacaoFuncionarioRepository.findById(id);
     }
@@ -35,14 +34,16 @@ public class FuncionarioService {
     }
 
     @Transactional
-    public void atualizarFuncionario(Long id, Funcionario dadosAtualizados) {
-        Funcionario objtFuncionario = buscarFuncionarioPorId(id)
-                .orElseThrow(() -> new IllegalArgumentException("Funcionario não encontrado"));
+    public void atualizarFuncionario(
+        Long id, Funcionario dadosAtualizados) {
+            Funcionario objtFuncionario = buscarFuncionarioPorId(id)
+            .orElseThrow(() -> new IllegalArgumentException("Funcionario nao encontrado"));
 
-                objtFuncionario.setNome(dadosAtualizados.getNome());
-                objtFuncionario.setSalario(dadosAtualizados.getSalario());
-                objtFuncionario.setCargo(dadosAtualizados.getCargo());
-                objtFuncionario.setIdentificadorEmpresa(dadosAtualizados.getIdentificadorEmpresa());
-    }
+            objtFuncionario.setCargo(dadosAtualizados.getCargo());
+            objtFuncionario.setNome(dadosAtualizados.getNome());
+            objtFuncionario.setSalario(dadosAtualizados.getSalario());
+            objtFuncionario.setIdentificadorEmpresa(dadosAtualizados.getIdentificadorEmpresa());
 
+        }
+    
 }

@@ -1,72 +1,59 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8">
     <title>Editar Empresa</title>
-    <!-- Bootstrap CSS CDN -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Bootstrap 5 -->
+    <link 
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" 
+        rel="stylesheet"
+    >
 </head>
-<body class="bg-light">
 
-    <div class="container py-5">
-        <div class="row justify-content-center">
-            <div class="col-md-6 col-lg-5">
-                <div class="card shadow-sm">
-                    <div class="card-body">
-                        <h1 class="card-title text-center mb-4">Editar Empresa</h1>
+<body class="bg-light d-flex justify-content-center align-items-center min-vh-100">
 
-                        <form th:action="@{'/empresaCTR/atualizarEmpresa/'+${empresaEditar.id_empresa}}" 
-                              th:object="${empresaEditar}" method="post" novalidate>
+<div class="card shadow-lg p-4" 
+     style="max-width: 500px; width: 100%; border-top: 5px solid #9370db;">
 
-                            <div class="mb-3">
-                                <label for="nome" class="form-label">Nome da Empresa</label>
-                                <input 
-                                    type="text" 
-                                    id="nome" 
-                                    th:field="*{nome}" 
-                                    class="form-control" 
-                                    placeholder="Digite o nome da empresa" 
-                                    required
-                                >
-                            </div>
+    <h2 class="text-center mb-4" style="color:#9370db;">Editar Empresa</h2>
 
-                            <div class="mb-3">
-                                <label for="cnpj" class="form-label">CNPJ</label>
-                                <input 
-                                    type="text" 
-                                    id="cnpj" 
-                                    th:field="*{cnpj}" 
-                                    class="form-control" 
-                                    placeholder="00.000.000/0000-00" 
-                                    required
-                                >
-                            </div>
+    <!-- Formulário de edição -->
+    <form th:action="@{'/empresaCTR/atualizarEmpresa/' + ${empresaEditar.id_empresa}}"
+          th:object="${empresaEditar}" method="post">
 
-                            <div class="mb-4">
-                                <label for="ramo" class="form-label">Ramo</label>
-                                <input 
-                                    type="text" 
-                                    id="ramo" 
-                                    th:field="*{ramo}" 
-                                    class="form-control" 
-                                    placeholder="Ex: Tecnologia, Comércio..." 
-                                    required
-                                >
-                            </div>
-
-                            <div class="d-flex justify-content-between align-items-center">
-                                <button type="submit" class="btn btn-primary px-4">Salvar Alterações</button>
-                                <a th:href="@{/empresaCTR/listarTodasEmpresas}" class="btn btn-outline-secondary">Voltar à Lista</a>
-                            </div>
-
-                        </form>
-                    </div>
-                </div>
-            </div>
+        <div class="mb-3">
+            <label class="form-label">Nome da Empresa</label>
+            <input type="text" class="form-control" th:field="*{nome}" required>
         </div>
-    </div>
 
-    <!-- Bootstrap JS Bundle (opcional) -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <div class="mb-3">
+            <label class="form-label">CNPJ</label>
+            <input type="text" class="form-control" th:field="*{cnpj}" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Ramo</label>
+            <input type="text" class="form-control" th:field="*{ramo}" required>
+        </div>
+
+        <button type="submit" 
+                class="btn w-100 text-white" 
+                style="background-color:#9370db;">
+            Salvar Alterações
+        </button>
+
+        <a th:href="@{/empresaCTR/listarTodasEmpresas}" 
+           class="btn btn-outline-secondary w-100 mt-3">
+            Voltar à Lista de Empresas
+        </a>
+
+    </form>
+
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>

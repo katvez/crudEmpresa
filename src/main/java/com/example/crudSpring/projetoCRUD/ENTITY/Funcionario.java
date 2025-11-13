@@ -1,7 +1,5 @@
 package com.example.crudSpring.projetoCRUD.ENTITY;
 
-import org.springframework.data.relational.core.sql.FalseCondition;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -19,32 +17,38 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Funcionario {
 
+public class Funcionario {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "codigo", nullable = false, unique = true)
+    @Column(name = "codigo", nullable = false, unique=true)
     private Long codigo;
 
-    @Column(name = "nome", nullable = false, length = 100)
+    @Column(name = "nome", nullable = false)
     private String nome;
 
-    @Column(name = "cargo", nullable = false, length = 20, unique = true)
-    private int cargo;
-
-    @Column(name = "salario", nullable = false, length = 100)
+    @Column(name = "salario", nullable = false, length=20)
     private double salario;
 
+    @Column(name = "cargo", nullable = false, length=100)
+    private String cargo;
+
     @ManyToOne
+    //cria a chave estrangeira
     @JoinColumn(name = "empresaID", nullable = false)
     private Empresa identificadorEmpresa;
 
-    public Funcionario(Long codigo, String nome, int cargo, double salario, Empresa identificadorEmpresa) {
+    public Funcionario(Long codigo, String nome, double salario, String cargo, Empresa identificadorEmpresa) {
         this.codigo = codigo;
         this.nome = nome;
-        this.cargo = cargo;
         this.salario = salario;
+        this.cargo = cargo;
         this.identificadorEmpresa = identificadorEmpresa;
     }
 
+    
+
+
+   
 }
